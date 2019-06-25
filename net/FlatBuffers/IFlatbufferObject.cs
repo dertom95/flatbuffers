@@ -24,5 +24,7 @@ namespace FlatBuffers
         void __init(int _i, ByteBuffer _bb);
 
         ByteBuffer ByteBuffer { get; }
+
+        int BufferPosition { get; }
     }
 }
