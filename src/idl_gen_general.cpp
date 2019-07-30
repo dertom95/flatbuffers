@@ -1133,11 +1133,10 @@ class GeneralGenerator : public BaseGenerator {
                                                             : "null");
             }
 
-            /*code +=
                 field.value.type.element == BASE_TYPE_BOOL
                     ? "false"
                     : (IsScalar(field.value.type.element) ? default_cast + "0"
-                                                          : "null");*/
+                                                          : "null");
             if (vectortype.base_type == BASE_TYPE_UNION &&
               lang_.language == IDLOptions::kCSharp) {
               code += ";}\n";
