@@ -1069,6 +1069,9 @@ class GeneralGenerator : public BaseGenerator {
                                 lang_.accessor_prefix + "bb_pos)";
               code += ", " + lang_.accessor_prefix + "bb) : null";
             }
+
+
+            
             break;
           case BASE_TYPE_STRING:
             code += lang_.getter_prefix;
@@ -1161,7 +1164,14 @@ class GeneralGenerator : public BaseGenerator {
       code += member_suffix;
       code += "}\n";
 
-      
+     code +=
+          "public int " + MakeCamel(field.name, lang_.first_camel_upper);
+      code += "BufferPosition";
+      code += lang_.getter_prefix;
+      code += offset_prefix;
+      code += lang_.accessor_prefix + "__vector(o) : 0; ";
+      code += lang_.getter_suffix;
+      code += "}\n";
 
       if (field.value.type.base_type == BASE_TYPE_VECTOR) {
         code +=
@@ -1172,18 +1182,18 @@ class GeneralGenerator : public BaseGenerator {
         code += lang_.accessor_prefix + "__vector_len(o) : 0; ";
         code += lang_.getter_suffix;
         code += "}\n";
-        // expose the position of the list
-        std::string bufferPosMethod = "";
-        bufferPosMethod +=
-            "  public int " + MakeCamel(field.name, lang_.first_camel_upper);
-        bufferPosMethod += "BufferPosition";
-        bufferPosMethod += lang_.getter_prefix;
-        bufferPosMethod += offset_prefix;
-        bufferPosMethod += lang_.accessor_prefix + "__vector(o) : 0; ";
-        bufferPosMethod += lang_.getter_suffix;
-        bufferPosMethod += "}\n";
+        //// expose the position of the list
+        //std::string bufferPosMethod = "";
+        //bufferPosMethod +=
+        //    "  public int " + MakeCamel(field.name, lang_.first_camel_upper);
+        //bufferPosMethod += "BufferPosition";
+        //bufferPosMethod += lang_.getter_prefix;
+        //bufferPosMethod += offset_prefix;
+        //bufferPosMethod += lang_.accessor_prefix + "__vector(o) : 0; ";
+        //bufferPosMethod += lang_.getter_suffix;
+        //bufferPosMethod += "}\n";
 
-        code += bufferPosMethod;
+        //code += bufferPosMethod;
 
         // See if we should generate a by-key accessor.
         if (field.value.type.element == BASE_TYPE_STRUCT &&
